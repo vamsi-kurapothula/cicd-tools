@@ -3,11 +3,13 @@
 #resize disk from 20GB to 50GB
 growpart /dev/nvme0n1 4
 
+lvextend -L +10G /dev/RootVG/rootVol
 lvextend -L +10G /dev/mapper/RootVG-varVol
 lvextend -L +10G /dev/mapper/RootVG-rootVol
 lvextend -l +100%FREE /dev/mapper/RootVG-homeVol
 
 xfs_growfs /
+xfs_growfs /var/tmp
 xfs_growfs /var
 xfs_growfs /home
 
